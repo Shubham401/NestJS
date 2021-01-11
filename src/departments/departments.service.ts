@@ -14,4 +14,17 @@ export class DepartmentsService {
     async findOne(id: string): Promise<Department> {
         return await this.departmentModel.findOne({ _id: id });
     }
+
+    async create(department: Department): Promise<Department> {
+        const newDepartment = new this.departmentModel(department);
+        return await newDepartment.save();
+    }
+
+    async delete(id: string): Promise<Department> {
+        return await this.departmentModel.findByIdAndRemove(id);
+    }
+
+    async update(id: string, department: Department): Promise<Department> {
+        return await this.departmentModel.findByIdAndUpdate(id, department, { new: true });
+    }
 }
