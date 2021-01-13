@@ -6,10 +6,21 @@ import { AppService } from './app.service';
 import { DepartmentsModule } from './departments/departments.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import config from './config/keys';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { HttpErrorFilter } from './shared/http-error.filter';
+import { LoggingInterceptor } from './shared/logging.interceptor';
 
 @Module({
   imports: [DepartmentsModule, MongooseModule.forRoot(config.mongoURI)],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, {
+    provide: APP_FILTER,
+    useClass: HttpErrorFilter
+  },
+  {
+    provide: APP_INTERCEPTOR,
+    useClass: LoggingInterceptor,
+  },
+],
 })
 export class AppModule {}
