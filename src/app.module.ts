@@ -9,9 +9,11 @@ import config from './config/keys';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpErrorFilter } from './shared/http-error.filter';
 import { LoggingInterceptor } from './shared/logging.interceptor';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [DepartmentsModule, MongooseModule.forRoot(config.mongoURI)],
+  imports: [DepartmentsModule, MongooseModule.forRoot(config.mongoURI), AuthModule, UsersModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_FILTER,
