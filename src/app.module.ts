@@ -11,9 +11,11 @@ import { HttpErrorFilter } from './shared/http-error.filter';
 import { LoggingInterceptor } from './shared/logging.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { CommonModule } from './common/common.module';
+
 
 @Module({
-  imports: [DepartmentsModule, MongooseModule.forRoot(config.mongoURI), AuthModule, UsersModule],
+  imports: [DepartmentsModule, MongooseModule.forRoot(config.mongoURI), AuthModule, UsersModule, CommonModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_FILTER,

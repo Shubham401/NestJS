@@ -3,6 +3,8 @@ import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiOkResponse } from '@nest
 import { CreateDepartmentDto } from './dto/create-department.dto'
 import { DepartmentsService } from './departments.service';
 import { Department } from './interfaces/department.interface'
+import { Role } from '../enums/role.enum';
+import { Roles } from '../enums/roles.decorator'
 
 @Controller('departments')
 export class DepartmentsController {
@@ -22,6 +24,7 @@ export class DepartmentsController {
  
     // To create a department we need to determine the Data Transfer Object
     @Post()
+    @Roles(Role.Admin)
     @ApiCreatedResponse({description: 'To Create A Department'})
     @ApiBody({type: CreateDepartmentDto})
     @ApiBearerAuth()
