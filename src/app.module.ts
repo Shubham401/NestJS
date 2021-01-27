@@ -15,7 +15,15 @@ import { CommonModule } from './common/common.module';
 
 
 @Module({
-  imports: [DepartmentsModule, MongooseModule.forRoot(config.mongoURI), AuthModule, UsersModule, CommonModule],
+  imports: [DepartmentsModule,
+    
+    // MongooseModule.forRoot(config.mongoURI), 
+    MongooseModule.forRoot(config.mongoURI, {
+      connectionName: 'KNOW-MX_DB',
+    }),
+    
+    
+    AuthModule, UsersModule, CommonModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_FILTER,
